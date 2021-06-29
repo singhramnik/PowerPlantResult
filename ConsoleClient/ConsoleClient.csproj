@@ -5,4 +5,17 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="InputData\**" />
+    <Compile Remove="OutputData\**" />
+    <EmbeddedResource Remove="InputData\**" />
+    <EmbeddedResource Remove="OutputData\**" />
+    <None Remove="InputData\**" />
+    <None Remove="OutputData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+  </ItemGroup>
+
 </Project>
