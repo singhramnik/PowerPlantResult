@@ -22,7 +22,15 @@ namespace ConsoleClient.ProcessProvider
             {
                 var outputFileName = @$"{outputPath}\{Path.GetFileNameWithoutExtension(file)}-Result.xml";
 
-                ProcessSingleFile(refData, file, outputFileName);
+                try
+                {
+                    ProcessSingleFile(refData, file, outputFileName);
+                }
+                catch (Exception ex)
+                {
+                    //Maybe log it as well.
+                    Console.WriteLine($"Error while processing {file} {ex.Message} -- will continue to next file");
+                }
 
                 //TODO: Once it has been Processed move it to Processed or Rejected folder
             }
@@ -33,8 +41,8 @@ namespace ConsoleClient.ProcessProvider
             var serialzer = new Serialzer();
                
             var xmlInputData = File.ReadAllText(inputFile);
-            var inputData = serialzer.Deserializer<GenerationReport>(xmlInputData);
 
+            var inputData = serialzer.Deserializer<GenerationReport>(xmlInputData);
 
             var output = ProcessData(refData, inputData);
 
